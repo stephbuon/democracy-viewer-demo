@@ -1,15 +1,23 @@
-import { React, useState } from "react";
+import { React, useState, useEffect } from "react";
 import { LoginRegister } from "./pages/login-register.jsx";
 import { Graph } from "./pages/graph.jsx";
 import { Layout } from "./pages/layout.jsx";
 import { Zoom } from "./pages/zoom.jsx";
+import Homepage from "./pages/Homepage";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Profile from "./pages/Profile";
+import { SubsetResultsPage } from "./SubsetSearch/SubsetResultsPage";
+import { DatasetResultsPage } from "./DatasetSearch/DatasetResultsPage";
 import { Upload } from "./pages/upload.jsx";
 import { MetadataForm } from "./pages/metadata-form.jsx";
+import "./App.css";
+import 'animate.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+  
+export const App = () => {
 
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-
-function App() {
-  const dataset = {
+  const graphData = {
     x: [
       "Sunday",
       "Monday",
@@ -33,21 +41,47 @@ function App() {
   };
 
   const [data, setData] = useState(undefined);
+  
+  const [dataset, setDataset] = useState(undefined);
+
+  const chooseDataset = (choice) =>{
+    setDataset(choice)
+    localStorage.setItem('dataset', JSON.stringify(choice))
+  }
+
+  useEffect(() => {
+    console.log("Strating Democracy Viewer App")
+
+    //TODO implement this (only when logged in?)
+    if(localStorage.getItem('dataset') != undefined)
+    {
+      setDataset(JSON.parse(localStorage.getItem('dataset')))
+    }
+  },[]);
+  
+  useEffect(()=>{
+    console.log("NOW USING NEW DATASET", dataset);
+  }, [dataset]);
+
+  
 
   return (
-    <div className="App">
-      <Router>
-        <Layout />
-        <div className="container border border-2 border-top-0 p-2">
-          <Routes>
-            <Route path="/" element={<Upload />}></Route>
-            <Route path="/login" element={<LoginRegister />}></Route>
-            <Route path="/graph" element={<Graph dataset={dataset} setData={setData} />}></Route>
-            <Route path="/zoom" element={<Zoom data={data} />}></Route>
-            <Route path="/mform" element={<MetadataForm table_name={"mfunds"} />}></Route>
-          </Routes>
-        </div>
-      </Router>
+    <div className={`App`} >
+      <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Homepage />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/profile" element={<Profile/>} />
+            <Route path="/login-register" element={<LoginRegister />}/>
+            <Route path="/graph" element={<Graph dataset={graphData} setData={setData} />}/>
+            <Route path="/zoom" element={<Zoom data={data} />}/>
+            <Route path="/mform" element={<MetadataForm table_name={"mfunds"} /> }/>
+            <Route path='/subsetsearch' element={<SubsetResultsPage dataset={dataset} />} />
+            <Route path='/datasetsearch' element={<DatasetResultsPage setDataset={(x) => chooseDataset(x)}/>} />
+            <Route path="/upload" element={<Upload />}/>
+        </Routes>
+      </BrowserRouter>
     </div>
   );
 }
