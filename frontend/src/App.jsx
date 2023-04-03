@@ -4,6 +4,7 @@ import { Graph } from "./pages/graph.jsx";
 import { Layout } from "./pages/layout.jsx";
 import { Zoom } from "./pages/zoom.jsx";
 import { Upload } from "./pages/upload.jsx";
+import { MetadataForm } from "./pages/metadata-form.jsx";
 
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
@@ -37,12 +38,13 @@ function App() {
     <div className="App">
       <Router>
         <Layout />
-        <div className="container border border-2">
+        <div className="container border border-2 border-top-0 p-2">
           <Routes>
             <Route path="/" element={<Upload />}></Route>
             <Route path="/login" element={<LoginRegister />}></Route>
             <Route path="/graph" element={<Graph dataset={dataset} setData={setData} />}></Route>
             <Route path="/zoom" element={<Zoom data={data} />}></Route>
+            <Route path="/mform" element={<MetadataForm table_name={"mfunds"} />}></Route>
           </Routes>
         </div>
       </Router>

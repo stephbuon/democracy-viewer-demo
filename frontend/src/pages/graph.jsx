@@ -124,26 +124,26 @@ export const Graph = ({ dataset, setData }) => {
             value={searchValue}
             setValue={setSearchValue}
           />
-          <div class="form-check">
+          <div className="form-check">
             <input
-              class="form-check-input"
+              className="form-check-input"
               type="radio"
               name="keywordRadioDefault"
               id="keywordRadio1"
               checked
             />
-            <label class="form-check-label" for="keywordRadio1">
+            <label className="form-check-label" htmlFor="keywordRadio1">
               Include Keyword
             </label>
           </div>
-          <div class="form-check">
+          <div className="form-check">
             <input
-              class="form-check-input"
+              className="form-check-input"
               type="radio"
               name="keywordRadioDefault"
               id="keywordRadio2"
             />
-            <label class="form-check-label" for="keywordRadio2">
+            <label className="form-check-label" htmlFor="keywordRadio2">
               Match Keyword
             </label>
           </div>

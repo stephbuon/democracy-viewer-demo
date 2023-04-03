@@ -1,8 +1,11 @@
-import React from "react";
+import { React, useEffect } from "react";
 import { TextField } from "../common/textField.jsx";
 import { useState } from "react";
+import { login, register } from "../api/api.js";
+import { useNavigate } from "react-router-dom";
 
-export function LoginRegister() {
+export function LoginRegister( {setAccount} ) {
+  const navigate = useNavigate();
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
   const [registerUsername, setRegisterUsername] = useState("");
@@ -15,6 +18,20 @@ export function LoginRegister() {
   const [suffix, setSuffix] = useState("");
   const [orcid, setOrcid] = useState("");
   const [linkedin, setLinkedin] = useState("");
+  const [logged, setLogged] = useState(undefined);
+  const [registered, setRegistered] = useState(undefined);
+
+  useEffect(() => {
+    if(logged){
+      navigate('/');
+    }
+  }, [logged]);
+
+  useEffect(() => {
+    if(registered){
+      navigate('/');
+    }
+  }, [registered]);
 
   return (
     <>
@@ -42,11 +59,18 @@ export function LoginRegister() {
               <button
                 type="button"
                 className="btn btn-md btn-primary"
-                onClick={() => { }}
+                onClick={() => {
+                  console.log(logged);
+                  login({
+                    "username": "rdschaefer",
+                    "password": "password"
+                  }, setLogged);
+                }}
               >
                 Login
               </button>
             )}
+            {logged == false && <p className="w-100">Failed to login!</p>}
           </div>
           <div className="col ms-3">
             <h2 className="text-center">Register</h2>
@@ -121,7 +145,18 @@ export function LoginRegister() {
                 <button
                   type="button"
                   className="btn btn-md btn-primary"
-                  onClick={() => { }}
+                  onClick={() => {
+                    register({
+                      "username": registerUsername,
+                      "password": registerPassword,
+                      "email": email,
+                      "title": title,
+                      "first_name": first,
+                      "last_name": last,
+                      "orcid": orcid,
+                      "linkedin_link": linkedin
+                    })
+                  }}
                 >
                   Register
                 </button>

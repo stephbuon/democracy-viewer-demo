@@ -1,16 +1,11 @@
 import { React, useState, useEffect } from "react";
 import { upload } from "../api/api.js";
+import { useNavigate } from 'react-router-dom';
 
 export const Upload = () => {
+  const navigate = useNavigate();
   const [file, setFile] = useState(undefined);
-
-  useEffect(() => {
-    console.log(file);
-    console.log(file == undefined);
-  }, [file]);
-  function print() {
-    console.log(file);
-  }
+  
   return (
     <>
       <label className="btn btn-default">
@@ -27,17 +22,12 @@ export const Upload = () => {
         disabled={file == undefined}
         onClick={() => {
           upload(file[0]);
+          navigate("/mform");
         }}
       >
         Upload
       </button>
-      <button
-        className="btn btn-success"
-        disabled={file == undefined}
-        onClick={print}
-      >
-        Log File
-      </button>
     </>
   );
 };
+
