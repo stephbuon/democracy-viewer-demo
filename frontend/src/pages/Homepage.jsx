@@ -48,7 +48,7 @@ export default function Homepage() {
               color="text.primary"
               gutterBottom
             >
-              TextMining Development 
+              Text Mining Development 
             </Typography>
             <Typography variant="h5" align="center" color="text.secondary" paragraph>
               A community to share and access numerous historical datasets. Helping to further research and knowledge on a daily basis.
