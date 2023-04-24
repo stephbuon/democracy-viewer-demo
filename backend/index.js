@@ -1,6 +1,10 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const cors = require("cors");
+const passport = require("passport");
+const saml = require("passport-saml");
+const fs = require("fs");
+require("./util/passport");
 
 // Import middleware
 const requestLog = require("./middleware/logging");
@@ -23,6 +27,8 @@ app.use(createModelsMiddleware);
 app.use(requestLog);
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ limit: "50mb", extended: true, parameterLimit: 50000} ));
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Testing health route
 app.get("/health", (req, res, next) => {
