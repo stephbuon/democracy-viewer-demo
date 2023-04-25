@@ -5,6 +5,8 @@ const config = require("./config");
 
 const savedUsers = [];
 
+const test = fs.readFileSync(config.saml.cert);
+
 passport.serializeUser((user, done) => {
     done(null, user);
 });

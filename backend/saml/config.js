@@ -16,7 +16,7 @@ const config = {
     },
     session: {
         resave: false,
-        secret: "",
+        secret: process.env.SAML_SECRET,
         saveUninitialized: true
     }
 }

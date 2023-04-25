@@ -60,8 +60,8 @@ export const Layout = () => {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             {getCurrentPage()}
           </Typography>
-          {location.pathname !== '/login' ? (
-            <Button color="inherit" component={Link} to="/login">
+          {location.pathname !== '/login-register' ? (
+            <Button color="inherit" component={Link} to="/login-register">
               Login or register
             </Button>
           ) : (
