@@ -3,7 +3,7 @@ const router = express.Router();
 
 const control = require("../controllers/users");
 const { authenticateJWT } = require("../middleware/authentication");
-const passport = require("../util/passport");
+const passport = require("../saml/passport");
 
 // Route to create a session and get access token
 router.post('/', async (req, res, next) => {
@@ -20,28 +20,6 @@ router.post('/', async (req, res, next) => {
   }
   next();
 });
-
-
-// router.post('/sso',
-//   passport.authenticate('saml', {
-//     successRedirect: '/',
-//     failureRedirect: '/login',
-//   })
-// );
-
-// // Route to create a session using SSO
-// router.post('/sso', async (req, res, next) => {
-//   try {
-//       passport.authenticate('saml', {
-//           successRedirect: '/',
-//           failureRedirect: '/login',
-//       });
-//   } catch (err) {
-//       console.error('Failed to log in with SAML:', err);
-//       res.status(500).json({ message: err.toString() });
-//   }
-//   next();
-// });
   
 // Route to get user data from token
 router.get('/', authenticateJWT, async (req, res, next) => {
