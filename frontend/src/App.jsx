@@ -10,6 +10,8 @@ import { SubsetResultsPage } from "./SubsetSearch/SubsetResultsPage";
 import { DatasetResultsPage } from "./DatasetSearch/DatasetResultsPage";
 import { UploadProgress } from "./UploadDownloadProgress/UploadProgress";
 import { DownloadProgress } from "./UploadDownloadProgress/DownloadProgress";
+import { Group } from "./Groups/Group";
+import { Groups } from "./Groups/Groups";
 import { Upload } from "./pages/upload.jsx";
 import "./App.css";
 import 'animate.css';
@@ -75,6 +77,13 @@ export const App = () => {
             <Route path="/uploadprogress" element={<UploadProgress navigated={navigated} setNavigated={(x) => setNavigated(x)}/>}></Route>
             <Route path="/downloadprogress" element={<DownloadProgress dataset={dataset} navigated={navigated} setNavigated={(x) => setNavigated(x)}/>}></Route>
             <Route path="/createdistributedconnection" element={<CreateDistributedConnection/>}/>
+            <Route
+              path='/groups'
+              element={<Groups />} />
+
+            <Route
+              path='/groups/:groupid'
+              element={<Group />} />
         </Routes>
       </BrowserRouter>
     </div>

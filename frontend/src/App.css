@@ -1,6 +1,7 @@
 
 .darkblue{
-    background: rgb(105, 105, 238);
+    background: #0d7edb;
+    /* background: rgb(42, 143, 207); */
     min-height: 100vh;
     min-width: 100vw;
     background-position: center;
